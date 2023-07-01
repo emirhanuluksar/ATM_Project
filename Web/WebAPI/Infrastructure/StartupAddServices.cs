@@ -1,5 +1,3 @@
-using Odeal.Bko.Web.Infrastructure;
-
 namespace WebAPI.Infrastructure;
 
 public static class StartupAddServices {
