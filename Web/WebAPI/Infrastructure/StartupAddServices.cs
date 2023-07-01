@@ -1,3 +1,5 @@
+using Odeal.Bko.Web.Infrastructure;
+
 namespace WebAPI.Infrastructure;
 
 public static class StartupAddServices {
@@ -7,7 +9,7 @@ public static class StartupAddServices {
         builder.Services.AddSwaggerGen();
         builder.AddIocRegistrations();
         builder.AddStartupCors();
-        // builder.AddStartupAuthentication();
+        builder.AddStartupAuthentication();
         builder.AddStartupAuthorization();
     }
 }
