@@ -7,7 +7,7 @@ public static class StartupAddServices {
         builder.Services.AddSwaggerGen();
         builder.AddIocRegistrations();
         builder.AddStartupCors();
-        builder.AddStartupAuthentication();
+        // builder.AddStartupAuthentication();
         builder.AddStartupAuthorization();
     }
 }

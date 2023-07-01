@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Core/Application/Application.csproj",
+                "${workspaceFolder}/Web/WebAPI/WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Core/Application/Application.csproj",
+                "${workspaceFolder}/Web/WebAPI/WebAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Core/Application/Application.csproj"
+                "${workspaceFolder}/Web/WebAPI/WebAPI.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
