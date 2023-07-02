@@ -5,10 +5,10 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
 
-RUN dotnet build "Web/WebAPI/WebAPI.csproj" -c Release -o /app/build
+RUN dotnet build "code/WebAPI/WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Web/WebAPI/WebAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "code/WebAPI/WebAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
