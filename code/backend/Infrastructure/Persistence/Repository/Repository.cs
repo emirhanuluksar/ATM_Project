@@ -3,48 +3,56 @@ using Application.interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 namespace Persistence.Repository;
-public class Repository<TEntity, TContext> : IRepository<TEntity>
-where TEntity : class, IEntity, new()
+public class Repository<TDocument, TContext> : IRepository<TDocument>
+where TDocument : class, IDocument, new()
 where TContext : DbContext, new() {
     public readonly TContext _context;
     public Repository(TContext context) {
         _context = context;
     }
-    public async Task AddAsync(TEntity entity) {
-        await _context.Set<TEntity>().AddAsync(entity);
+    public async Task AddAsync(TDocument entity) {
+        await _context.Set<TDocument>().AddAsync(entity);
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(TEntity entity) {
-        _context.Set<TEntity>().Remove(entity);
+    public async Task DeleteAsync(TDocument entity) {
+        _context.Set<TDocument>().Remove(entity);
         await _context.SaveChangesAsync();
     }
 
-    public TEntity? FindById(int id) {
-        return _context.Set<TEntity>().Find(id);
+    public TDocument? FindById(int id) {
+        return _context.Set<TDocument>().SingleOrDefault(doc => doc.Id == id);
     }
 
-    public async Task<TEntity?> FindByIdAsync(int id) {
-        return await _context.Set<TEntity>().FindAsync(id);
+    public async Task<TDocument?> FindByIdAsync(int id) {
+        return await _context.Set<TDocument>().FindAsync(id);
     }
 
-    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> filter) {
-        return await _context.Set<TEntity>().FirstOrDefaultAsync(filter);
+    public TDocument? Get(Expression<Func<TDocument, bool>> filter) {
+        return _context.Set<TDocument>().FirstOrDefault(filter);
     }
 
-    public IList<TEntity> GetList(Expression<Func<TEntity, bool>>? filter = null) {
+    public async Task<TDocument?> GetAsync(Expression<Func<TDocument, bool>> filter) {
+        return await _context.Set<TDocument>().FirstOrDefaultAsync(filter);
+    }
+
+    public IList<TDocument> GetList(Expression<Func<TDocument, bool>>? filter = null) {
         return filter == null
-            ? _context.Set<TEntity>().ToList()
-            : _context.Set<TEntity>().Where(filter).ToList();
+            ? _context.Set<TDocument>().ToList()
+            : _context.Set<TDocument>().Where(filter).ToList();
     }
 
-    public async Task<IList<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? filter = null) {
-        return filter == null
-            ? await _context.Set<TEntity>().ToListAsync()
-            : await _context.Set<TEntity>().Where(filter).ToListAsync();
+    public IList<TDocument> GetList() {
+        return _context.Set<TDocument>().ToList();
     }
-    public async Task UpdateAsync(TEntity entity) {
-        _context.Set<TEntity>().Update(entity);
+
+    public async Task<IList<TDocument>> GetListAsync(Expression<Func<TDocument, bool>>? filter = null) {
+        return filter == null
+            ? await _context.Set<TDocument>().ToListAsync()
+            : await _context.Set<TDocument>().Where(filter).ToListAsync();
+    }
+    public async Task UpdateAsync(TDocument entity) {
+        _context.Set<TDocument>().Update(entity);
         await _context.SaveChangesAsync();
     }
 }

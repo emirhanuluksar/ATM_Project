@@ -25,9 +25,9 @@ public class CategoryService : ICategoryService {
         return result;//bu değişcek :)
     }
 
-    public IList<Category> GetCategories() {
+    public List<Category> GetCategories() {
         _logger.LogDebug("CategoryService.GetCategories() method is started.");
-        return _repository.GetList();
+        return _repository.GetList().ToList();
     }
 
     public int GetCategoriesCount() {

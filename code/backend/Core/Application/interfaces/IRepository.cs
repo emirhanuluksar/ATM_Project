@@ -3,14 +3,16 @@ using Domain;
 
 namespace Application.interfaces;
 
-public interface IRepository<T> where T : class, IEntity, new() {
+public interface IRepository<TDocument> where TDocument : class, IDocument, new() {
 
-    Task<T?> GetAsync(Expression<Func<T, bool>> filter);
-    Task<IList<T>> GetListAsync(Expression<Func<T, bool>>? filter = null);
-    IList<T> GetList();
-    Task AddAsync(T entity);
-    Task UpdateAsync(T entity);
-    Task DeleteAsync(T entity);
-    Task<T?> FindByIdAsync(int id);
-    T? FindById(int id);
+    TDocument? Get(Expression<Func<TDocument, bool>> filter);
+    Task<TDocument?> GetAsync(Expression<Func<TDocument, bool>> filter);
+    IList<TDocument> GetList();
+    IList<TDocument> GetList(Expression<Func<TDocument, bool>>? filter = null);
+    Task<IList<TDocument>> GetListAsync(Expression<Func<TDocument, bool>>? filter = null);
+    Task AddAsync(TDocument entity);
+    Task UpdateAsync(TDocument entity);
+    Task DeleteAsync(TDocument entity);
+    Task<TDocument?> FindByIdAsync(int id);
+    TDocument? FindById(int id);
 }

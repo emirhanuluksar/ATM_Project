@@ -1,7 +1,6 @@
 namespace Domain;
 
-public class Product : IEntity {
-    public int ProductId { get; set; }
+public class Product : Document {
     public int CategoryId { get; set; }
     public string ProductName { get; set; } = string.Empty;
     public string ProductDescription { get; set; } = string.Empty;

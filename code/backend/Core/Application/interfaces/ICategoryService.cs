@@ -8,6 +8,6 @@ public interface ICategoryService {
     Task<Category> UpdateCategoryAsync(Category updateCategory);
     Task<Category> DeleteCategoryAsync(int categoryId);
     Category? GetCategoryById(int categoryId);
-    IList<Category> GetCategories();
+    List<Category> GetCategories();
     int GetCategoriesCount();
 }
