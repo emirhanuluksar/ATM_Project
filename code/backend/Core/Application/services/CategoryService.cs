@@ -49,8 +49,6 @@ public class CategoryService : ICategoryService {
         return _repository.FindById(categoryId);
     }
 
-    // ? için kontrol yapılacak
-
     public async Task<Category> UpdateCategoryAsync(Category updateCategory) {
         _logger.LogDebug("CategoryService.UpdateCategoryAsync() method is started.");
         await _repository.UpdateAsync(updateCategory);
