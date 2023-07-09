@@ -21,7 +21,7 @@ public class CategoryController : ApiController {
         _categoryService = categoryService;
     }
 
-    [HttpGet("getallcategories")]
+    [HttpGet("GetAllCategories")]
     public List<Category> GetAllCategories() {
         return _categoryService.GetCategories();
     }

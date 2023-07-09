@@ -8,5 +8,7 @@ public static class IocRegistrations {
     public static void AddIocRegistrations(this WebApplicationBuilder builder) {
         builder.Services.AddScoped<ICategoryService, CategoryService>();
         builder.Services.AddScoped<ICategoryDal, CategoryDal>();
+        builder.Services.AddScoped<IPostService, PostService>();
+        builder.Services.AddScoped<IPostDal, PostDal>();
     }
 }
