@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 namespace Application.services;
 
 public class ProductService : IProductService {
-    private readonly IRepository<Product> _repository;
+    private readonly IProductDal _productDal;
     private readonly ILogger<ProductService> _logger;
-    public ProductService(IRepository<Product> repository, ILogger<ProductService> logger) {
-        _repository = repository;
+    public ProductService(IProductDal repository, ILogger<ProductService> logger) {
+        _productDal = repository;
         _logger = logger;
     }
     public async Task<Product> AddProductAsync(Product product) {
@@ -18,7 +18,7 @@ public class ProductService : IProductService {
         if (!result) {
             throw new ProductAlreadyExistsException("This product already exists");
         }
-        await _repository.AddAsync(product);
+        await _productDal.AddAsync(product);
         return product;
     }
 
@@ -28,33 +28,33 @@ public class ProductService : IProductService {
         if (result is null) {
             throw new ProductNotFoundException("Product not found");
         }
-        await _repository.DeleteAsync(result);
+        await _productDal.DeleteAsync(result);
         return result;
     }
 
     public Product? GetProductById(int productId) {
         _logger.LogDebug("ProductService.GetProductById() method is started.");
-        return _repository.FindById(productId);
+        return _productDal.FindById(productId);
     }
 
     public List<Product> GetProducts() {
         _logger.LogDebug("ProductService.Getproducts() method is started.");
-        return _repository.GetList().ToList();
+        return _productDal.GetList().ToList();
     }
 
     public int GetProductsCount() {
         _logger.LogDebug("ProductService.GetProductsCount() method is started.");
-        return _repository.GetList().Count;
+        return _productDal.GetList().Count;
     }
 
     public async Task<Product> UpdateProductAsync(Product updateProduct) {
         _logger.LogDebug("ProductService.UpdateProductAsync() method is started.");
-        await _repository.UpdateAsync(updateProduct);
+        await _productDal.UpdateAsync(updateProduct);
         return updateProduct;
     }
 
     private bool GetIfProductExists(Product product) {
-        var result = _repository.Get(x => x.Id == product.Id && string.Equals(x.ProductName, product.ProductName, StringComparison.OrdinalIgnoreCase));
+        var result = _productDal.Get(x => x.Id == product.Id || x.ProductName == product.ProductName);
         return result is null;
     }
 }

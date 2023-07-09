@@ -55,7 +55,7 @@ public class PostService : IPostService {
     }
 
     private bool GetIfPostExists(Post post) {
-        var result = _postDal.Get(x => x.Id == post.Id && x.PostTitle == post.PostTitle);
+        var result = _postDal.Get(x => x.Id == post.Id || x.PostTitle == post.PostTitle);
         return result is null;
     }
 }
