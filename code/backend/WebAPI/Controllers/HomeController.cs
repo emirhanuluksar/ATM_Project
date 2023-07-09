@@ -14,5 +14,11 @@ public class HomeController : ControllerBase {
     public HomeController(ILogger<HomeController> logger) {
         _logger = logger;
     }
+
+    [HttpGet(""), HttpGet("api/[controller]/GetTime")]
+    public DateTime GetTime() {
+        _logger.LogInformation("HomeController.GetTime() ");
+        return DateTime.Now;
+    }
 }
 
