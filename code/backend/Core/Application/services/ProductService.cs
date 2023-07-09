@@ -8,8 +8,8 @@ namespace Application.services;
 public class ProductService : IProductService {
     private readonly IProductDal _productDal;
     private readonly ILogger<ProductService> _logger;
-    public ProductService(IProductDal repository, ILogger<ProductService> logger) {
-        _productDal = repository;
+    public ProductService(IProductDal productDal, ILogger<ProductService> logger) {
+        _productDal = productDal;
         _logger = logger;
     }
     public async Task<Product> AddProductAsync(Product product) {
