@@ -10,5 +10,7 @@ public static class IocRegistrations {
         builder.Services.AddScoped<ICategoryDal, CategoryDal>();
         builder.Services.AddScoped<IPostService, PostService>();
         builder.Services.AddScoped<IPostDal, PostDal>();
+        builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<IProductDal, ProductDal>();
     }
 }
