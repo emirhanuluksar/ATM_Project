@@ -6,7 +6,7 @@ namespace Persistence.Context;
 
 public class UluarsWebContext : DbContext {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        const string connectionString = "Server=localhost;Database=uluarsite;Trusted_Connection=True;";
+        const string connectionString = "Server=localhost;Database=uluarsite;Trusted_Connection=True;TrustServerCertificate=True;";
         optionsBuilder.UseSqlServer(connectionString);
     }
 
