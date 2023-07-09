@@ -6,10 +6,7 @@ namespace Persistence.Repository;
 public class Repository<TDocument, TContext> : IRepository<TDocument>
 where TDocument : class, IDocument, new()
 where TContext : DbContext, new() {
-    public readonly TContext _context;
-    public Repository(TContext context) {
-        _context = context;
-    }
+    public readonly TContext _context = new();
     public async Task AddAsync(TDocument entity) {
         await _context.Set<TDocument>().AddAsync(entity);
         await _context.SaveChangesAsync();
