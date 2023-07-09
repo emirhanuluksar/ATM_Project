@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Controllers;
-[Route("[controller]")]
+[ApiController]
+[Route("/")]
 public class HomeController : ControllerBase {
     private readonly ILogger<HomeController> _logger;
 
